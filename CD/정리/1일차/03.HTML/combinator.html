@@ -1,0 +1,33 @@
+<html>
+    <style>
+        /* .data1 li {color:blue;} */
+        /* .data1 > ul > li {color:red;} */
+        ul ul li {color : red;}
+        /* ul > ul > li {color:red;} */
+        /* .data1  ul  li {color:red;} */
+        .data2 li {color:blue;}
+        ul.data1 > :nth-child(2) {color: red;}
+    </style>
+    <head>
+        <title>
+            결합자 연습
+        </title>
+        <h1>결합자를 공부해 봅시다.</h1>
+    </head>
+    <body>
+        <br>
+        1. 자손결합자(공백)와 자식결합자(>)
+        <ul class="data1">
+            <li>a</li>
+            <li>b</li>
+            <ul>
+            <li>c</li>
+            <li>d</li>
+            </ul>
+            </ul>
+            <ul class="data2">
+            <li>e</li>
+            <li>f</li>
+            </ul>
+    </body>
+</html>

@@ -1,0 +1,183 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+*{ /* 모든태그에 적용 : * (초기값 설정) */
+	margin: 0;
+	padding: 0;
+}
+
+header{
+	background-color: #e2c100;
+	margin: 5px auto;	
+	border: 1px solid #000000;
+	padding: 5px;
+	width: 700px;
+	height: 300px;
+} 
+
+main{
+	background-color: #a6ae24;
+	margin: 0 auto; /* auto 알아서 중앙으로 맞춰줌 */
+	border-bottom: 1px solid #000000;
+	padding: 20px 0 20px 0; 
+	width: 500px;
+	height: 150px;
+}
+
+#box1{
+	background-color: #ff8000;
+	width: 250px;
+	height: 120px;
+	float: left;
+}
+#box2{
+	background-color: #be81f7;
+	width: 250px;
+	height: 120px;
+	float: left;
+}
+
+footer{
+	background-color: #75c1e3;
+	margin: 30px auto;
+	border: 3px dotted #000000;
+	padding: 20px;
+	width: 650px;
+	height: 300px;
+}
+
+.submit{ 
+border-top-left-radius: 5px; 
+border-top-right-radius: 5px; 
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px; 
+background: white;}
+.submit:hover {
+border-top-left-radius: 5px; 
+border-top-right-radius: 5px; 
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px; 
+background: black;
+color: white;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+	<p>header 영역</p>
+    <br>
+    <input type="submit" class="submit" value="글쓰기">	
+    <!-- web페이지 -> web페이지이동 -->
+<form action="NewFile.jsp">
+
+    ID:<input type="text" name="id" title="여기에 id 기입" size="10" placeholder="id 기입">
+    <br><br>
+    PW:<input type="password" name="pwd" size="10">
+    <br>
+    
+    <!-- 버튼만들기 -->
+    <input type ="submit" value="NewFile.jsp 이동">
+    </form>
+
+    <input type="checkbox" value="패션" checked="checked">패션<br>
+    <input type="checkbox" value="음악">음악<br>
+    <input type="checkbox" value="게임">게임<br>
+    
+    <!-- name="car"로 묶어 주어야 1개만 선택 가능하다 / name묶기 전 다중선택 가능 -->
+    <input type="radio" name="car" value="벤츠">Benz
+    <input type="radio" name="car" value="아우디">아우디
+    <input type="radio" name="car" value="BMW">BMW
+</header>
+
+<main>
+	<p>main 영역</p>
+	
+	<div id="box1">
+		<p>box 1</p>
+        <table border="4"  bgcolor="bbcc00"  style="width: 100%" 
+        cellpadding="5" rules="rows">
+         <caption>Type1</caption>
+         <col width="100"><col width="100"><col width="70">
+         <tr>
+         
+             <th>No.</th>
+             <th>Name</th>
+             <th>age</th>
+         </tr>
+         <tr>
+             <th>1</th>
+             <td>Kim</td>
+             <td>33</td>
+         </tr>	
+         <tr>
+             <th>2</th>
+             <td>Lee</td>
+             <td>35</td>
+         </tr>	
+     </table>
+	</div>
+	
+	<div id="box2">
+		<p>box 2</p>
+        <table border="1" style="width: 50%">
+            <caption>Type2</caption>
+            <tr bgcolor="#f0ffff">
+                <td col width="100">No.</td>
+                <td col width="100">Name</td>
+                <td col width="70">age</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Kim</td>
+                <td rowspan="2">33</td>
+            </tr>	
+            <tr>
+                <td>2</td>
+                <td>Lee</td>
+            </tr>	
+        </table>
+	</div>
+</main>
+
+<footer>
+	<p>footer 영역</p>
+    <!-- 1~5 까지 선택할 수 있는 거 생김..  -->
+    number : <input type="number" max="5" min="1">
+    <br>
+
+    <!-- 달력 생성 -->
+    <!-- 달력이 2개면 언제부터 언제까지 ! -->
+    date : <input type="date">
+    <br>
+
+
+    <!-- 컬러 선택 할 수 있음  -->
+    color : <input type="color" value="#ff0000">
+    <br>
+
+    <!-- 슬라이드 생성  -->
+    range : <input type="range" max="10" min="0">
+    <br>
+
+    <!-- 검색창 생성 -->
+    search : <input type="search">
+    <select multiple="multiple">
+        <option value="apple">사과</option>
+        <option value="pear">배</option>
+        <option value="banana">바나나</option>
+        <option value="grape">포도</option>
+    </select>
+
+    <textarea rows="10" cols="30">
+br태그가 없으면 옆으로 나열됩니다.
+    </textarea>
+</footer>
+
+</body>
+</html>
