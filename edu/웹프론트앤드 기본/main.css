@@ -1,0 +1,12 @@
+div:hover {
+    color: red;
+}
+/* div:active {
+    color: red;
+} */
+[disabled] {
+    background-color: orange;
+}
+[type="password"] {
+    background-color: red;
+}
