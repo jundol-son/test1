@@ -27,66 +27,66 @@ app = FastAPI()
 # def get_users(limit: int = None): # limit을 선택적으로, 기본 값 null
 #     return {"limit": limit}
 
-#4. fastapi 요청본문1(request body)
-# class User(BaseModel):
-#     name: str
-#     password: str # 단순예제, 실무에서는 반드시 암호화해야함
-#     avatar_url: Optional[HttpUrl] = None # HttpUrl : pydantic타입
+# 4. fastapi 요청본문1(request body)
+class User(BaseModel):
+    name: str
+    password: str # 단순예제, 실무에서는 반드시 암호화해야함
+    avatar_url: Optional[HttpUrl] = None # HttpUrl : pydantic타입
 
 
-# @app.post("/users")
-# def create_user(user: User):
-#     return user
+@app.post("/users")
+def create_user(user: User):
+    return user
 
-# #http :8000/users name=spike password=1234 name, password를 이용하여 실행
-# """
-# 답변
-# HTTP/1.1 200 OK
-# content-length: 52
-# content-type: application/json
-# date: Fri, 19 Jul 2024 06:05:47 GMT
-# server: uvicorn
+#http :8000/users name=spike password=1234 name, password를 이용하여 실행
+"""
+답변
+HTTP/1.1 200 OK
+content-length: 52
+content-type: application/json
+date: Fri, 19 Jul 2024 06:05:47 GMT
+server: uvicorn
 
-# {
-#     "avatar_url": null,
-#     "name": "spike",
-#     "password": "1234"
-# }
-# """
+{
+    "avatar_url": null,
+    "name": "spike",
+    "password": "1234"
+}
+"""
 
-#4. fastapi 요청본문2(request body)
-# class Item(BaseModel):
-#     name: str
-#     price: float
-#     amount: int = 0
-
-
-# class User(BaseModel):
-#     name: str
-#     password: str
-#     avatar_url: Optional[HttpUrl] = None
-#     inventory: List[Item] = []  # 추가: inventory
+# 4. fastapi 요청본문2(request body)
+class Item(BaseModel):
+    name: str
+    price: float
+    amount: int = 0
 
 
-# @app.post("/users")
-# def create_user(user: User):
-#     return user
+class User(BaseModel):
+    name: str
+    password: str
+    avatar_url: Optional[HttpUrl] = None
+    inventory: List[Item] = []  # 추가: inventory
 
 
-# # 추가: get_user()
-# @app.get("/users/me")
-# def get_user():
-#     fake_user = User(
-#         name="FastCampus",
-#         password="1234",
-#         inventory=[
-#             Item(name="전설 무기", price=1_000_000),
-#             Item(name="전설 방어구", price=900_000),
-#         ]
-#     )
-#     return fake_user
+@app.post("/users")
+def create_user(user: User):
+    return user
 
-#5. 데이터 검증
+
+# 추가: get_user()
+@app.get("/users/me")
+def get_user():
+    fake_user = User(
+        name="FastCampus",
+        password="1234",
+        inventory=[
+            Item(name="전설 무기", price=1_000_000),
+            Item(name="전설 방어구", price=900_000),
+        ]
+    )
+    return fake_user
+
+# 5. 데이터 검증
 # """
 #  Path(), Query() 함수를 이용하면 매개변수를 명시적으로 정의할 수 있고, 다양한 옵션을 추가할 수 있음
 #  Path, Query는 Params 클래스의 서브 클래스입니다. 하지만 실제로는 해당 클래스를 반환하는 함수
@@ -174,14 +174,14 @@ app = FastAPI()
 #http :8000/cookie Cookie:ga=GA12.3.4
 #HTTPie에서 쿠키는 Cookie:<key>=<value>;<key>=<value>와 같이 작성합니다. ;은 구분자입니다.
 # 2) 헤더
-"""
-헤더에 `X-` 접두어는 사용자 정의 헤더라는 것을 의미합니다. 반드시 이렇게 할 필요는 없지만, 표준 헤더와 구분짓기 위해 사용합니다. 사실.. 이 [정책은 폐기](https://tools.ietf.org/html/rfc6648) 되었지만, 여전히 다들 이 관례를 따르고 있습니다.
-파이썬에서 `-`을 변수명으로 허락하지 않기 떄문에, 언더스코어(`_`)를 대신 사용해야 합니다. 그리고 대소문자 구분을 하지 않습니다. 실제로는 아래와 같이 테스트하면 정상 작동합니다.
-추가로 Header는 다른 클래스와 다르게 convert_underscores 옵션을 갖는데 False를 줄 경우 하이픈을 언더스코어로 변환하지 않습니다
-"""
-@app.get("/header")
-def get_headers(x_token: str = Header(None, title="토큰")):
-    return {"X-Token": x_token}
+# """
+# 헤더에 `X-` 접두어는 사용자 정의 헤더라는 것을 의미합니다. 반드시 이렇게 할 필요는 없지만, 표준 헤더와 구분짓기 위해 사용합니다. 사실.. 이 [정책은 폐기](https://tools.ietf.org/html/rfc6648) 되었지만, 여전히 다들 이 관례를 따르고 있습니다.
+# 파이썬에서 `-`을 변수명으로 허락하지 않기 떄문에, 언더스코어(`_`)를 대신 사용해야 합니다. 그리고 대소문자 구분을 하지 않습니다. 실제로는 아래와 같이 테스트하면 정상 작동합니다.
+# 추가로 Header는 다른 클래스와 다르게 convert_underscores 옵션을 갖는데 False를 줄 경우 하이픈을 언더스코어로 변환하지 않습니다
+# """
+# @app.get("/header")
+# def get_headers(x_token: str = Header(None, title="토큰")):
+#     return {"X-Token": x_token}
 
 
 
