@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from utils import fetch_data_by_operator, fetch_all_data
 
 # 검색 실행 함수
@@ -28,6 +29,10 @@ def search_operator():
         except Exception as e:
             st.error(f"전체 데이터를 조회하는 중 오류가 발생했습니다: {e}")
 
+# 가격이 10000 이상인 경우 초록색 배경을 적용하는 함수
+def highlight_price(val):
+    return 'background-color: green' if val > 10000.00 else ''
+
 def show_page():
     st.title("운용사명 검색")
     st.write("이곳은 운용사명 검색 페이지입니다.")
@@ -49,6 +54,18 @@ def show_page():
         else:
             # 검색 결과가 있으면 데이터 출력
             st.write("검색 결과:")
-            st.dataframe(st.session_state.search_results)  # 검색된 데이터 맨 아래에 배치
+            data = st.session_state.search_results
 
+            # '가격' 컬럼을 소수점 2자리로 반올림
+            data['가격'] = data['가격'].round(2)
+
+            # '가격' 컬럼에 대해 조건부 색상 적용
+            styled_data = data.style.applymap(highlight_price, subset=['가격'])
+
+            # 가격 컬럼의 표시 형식을 소수점 2자리로 설정
+            styled_data = styled_data.format({'가격': '{:.2f}'})
+
+            st.dataframe(styled_data)  # 스타일이 적용된 데이터프레임을 출력
+
+# 페이지 실행
 show_page()
